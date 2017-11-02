@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    if person
+        h1 Hello #{person.name}!
+        p Here are your full details:
+        pre= JSON.stringify(person, null, 2)
+    else
+        h1 There's no such person!
+    script.
+        console.log(!{JSON.stringify(person)})
