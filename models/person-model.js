@@ -10,7 +10,11 @@ const PersonSchema = mongoose.Schema({
         type: Number,
         default: 0,
         min: 0
-    }
+    },
+    friends: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Person'
+    }]
 })
 PersonSchema.plugin(AutoIncrement, {inc_field: 'id'})
 

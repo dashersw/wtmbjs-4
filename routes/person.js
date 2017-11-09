@@ -24,6 +24,15 @@ router.post('/', async (req, res, next) => {
     res.send(person)
 })
 
+router.post('/:id/friends', async (req, res, next) => {
+    const person = await PersonService.find(req.params.id)
+    const target = await PersonService.find(req.body.targetId)
+
+    person.friends.addToSet(target)
+    const updatedPerson = await person.save()
+    res.send(updatedPerson)
+});
+
 router.delete('/:id', async (req, res, next) => {
     await PersonService.del(req.params.id)
 

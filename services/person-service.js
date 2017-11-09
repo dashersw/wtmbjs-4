@@ -3,7 +3,7 @@ const fs = require('fs')
 const PersonModel = require('../models/person-model')
 
 async function findAll() {
-    return PersonModel.find()
+    return PersonModel.find().populate('friends')
 }
 
 async function add(person) {
@@ -15,7 +15,7 @@ async function del(id) {
 }
 
 async function find(id) {
-    return PersonModel.findOne({ id })
+    return PersonModel.findOne({ id }).populate('friends')
 }
 
 module.exports = {
