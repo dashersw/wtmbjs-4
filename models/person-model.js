@@ -2,10 +2,14 @@ const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const PersonSchema = mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     age: {
         type: Number,
-        default: 0
+        default: 0,
+        min: 0
     }
 })
 PersonSchema.plugin(AutoIncrement, {inc_field: 'id'})
