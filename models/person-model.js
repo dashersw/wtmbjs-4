@@ -1,11 +1,15 @@
-module.exports = class Person {
-    constructor(id, name, age) {
-        this.id = id
-        this.name = name
-        this.age = age || 0
-    }
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
-    static create(person) {
-        return new Person(person.id, person.name, person.age);
+const PersonSchema = mongoose.Schema({
+    name: String,
+    age: {
+        type: Number,
+        default: 0
     }
-}
+})
+PersonSchema.plugin(AutoIncrement, {inc_field: 'id'})
+
+const PersonModel = mongoose.model('Person', PersonSchema)
+
+module.exports = PersonModel
