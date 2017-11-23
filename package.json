@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava --verbose",
+    "test-watch" :"ava --verbose --watch"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,9 @@
     "mongoose": "^4.13.1",
     "mongoose-sequence": "^4.0.1",
     "pug": "^2.0.0-rc.4"
+  },
+  "devDependencies": {
+    "ava": "0.23.0",
+    "supertest": "^3.0.0"
   }
 }
