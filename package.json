@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ava --verbose",
+    "test": "nyc ava --verbose",
     "test-watch" :"ava --verbose --watch"
   },
   "repository": {
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "ava": "0.23.0",
+    "nyc": "^11.3.0",
     "supertest": "^3.0.0"
   }
 }
