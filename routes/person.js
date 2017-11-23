@@ -18,6 +18,12 @@ router.get('/:id', async (req, res, next) => {
     res.render('person-detail', {person})
 })
 
+router.get('/:id/json', async (req, res, next) => {
+    const person = await PersonService.find(req.params.id)
+    if (!person) res.status(404)
+    res.send(person)
+})
+
 router.post('/', async (req, res, next) => {
     const person = await PersonService.add(req.body)
 
