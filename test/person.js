@@ -2,16 +2,14 @@ import test from 'ava'
 import request from 'supertest'
 import app from '../app'
 
-const server = request(app)
-
 test('Get list of people', async t => {
     const personToCreate = {name: 'Armagan Amcalar', age: 33}
 
-    const creation = await server
+    const creation = await request(app)
         .post('/person')
         .send(personToCreate)
 
-	const res = await server
+	const res = await request(app)
 		.get('/person')
 
     t.is(res.status, 200)
@@ -22,7 +20,7 @@ test('Get list of people', async t => {
 test('Create new person', async t => {
     const personToCreate = {name: 'Armagan Amcalar', age: 33}
 
-    const res = await server
+    const res = await request(app)
         .post('/person')
         .send(personToCreate)
 
@@ -34,12 +32,12 @@ test('Create new person', async t => {
 test('Fetch a person', async t => {
     t.plan(2)
 
-    const person = (await server
+    const person = (await request(app)
         .post('/person')
         .send({name: 'Armagan Amcalar', age: 33}))
         .body
 
-    const fetch = await server
+    const fetch = await request(app)
         .get(`/person/${person.id}/json`)
 
     t.is(fetch.status, 200)
@@ -49,18 +47,18 @@ test('Fetch a person', async t => {
 test('Delete a person', async t => {
     t.plan(3)
 
-    const person = (await server
+    const person = (await request(app)
         .post('/person')
         .send({name: 'Armagan Amcalar', age: 33}))
         .body
 
-    const del = await server
+    const del = await request(app)
         .delete(`/person/${person.id}`)
 
     t.is(del.status, 200)
     t.is(del.text, 'ok!')
 
-    const fetch = await server
+    const fetch = await request(app)
     .get(`/person/${person.id}/json`)
 
     t.is(fetch.status, 404)
