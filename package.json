@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc ava --verbose",
-    "test-watch" :"ava --verbose --watch"
+    "test-watch": "ava --verbose --watch"
   },
   "repository": {
     "type": "git",
