@@ -63,3 +63,25 @@ test('Delete a person', async t => {
 
     t.is(fetch.status, 404)
 })
+
+test('Make friends with', async t => {
+    const person1 = (await request(app)
+        .post('/person')
+        .send({name: 'Armagan Amcalar', age: 33}))
+        .body
+
+    const person2 = (await request(app)
+        .post('/person')
+        .send({name: 'Mihri Minaz', age: 29}))
+        .body
+
+    const makeFriends = (await request(app)
+        .post(`/person/${person1.id}/friends`)
+        .send({targetId: person2.id}))
+
+    const updatedPerson1 = (await request(app)
+        .get(`/person/${person1.id}/json`))
+        .body
+
+    t.deepEqual(updatedPerson1.friends[0], person2)
+})
