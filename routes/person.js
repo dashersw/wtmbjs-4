@@ -27,7 +27,7 @@ router.get('/:id/json', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     const person = await PersonService.add(req.body)
 
-    res.send(person)
+    res.send('OK!')
 })
 
 router.post('/:id/friends', async (req, res, next) => {
