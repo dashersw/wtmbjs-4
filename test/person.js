@@ -1,6 +1,6 @@
 import test from 'ava'
 import request from 'supertest'
-import app from '../app'
+import app from '../src/app'
 
 test('Get list of people', async t => {
     const personToCreate = {name: 'Armagan Amcalar', age: 33}
